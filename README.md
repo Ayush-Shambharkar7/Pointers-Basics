@@ -1,80 +1,108 @@
-# pointers
-Experiment 10
-
+# Pointer Basics
+Experiment 9
 
 ## Aim 
-To study pointer operations
+To use basic pointers.
 
 ## Theory
+**Definition**
 <br>
-In C++, functions can receive parameters in different ways, influencing how the function manipulates the provided values. Two common methods are Call by Reference and Call by Value:
-<br>
-
-### Call by Reference  
-
-**Definition:** Call by Reference means passing the address (reference) of the actual parameters to the function. This allows the function to modify the original values.  
-
-**Working:** The function receives pointers to the variables, and operations performed inside the function affect the original variables directly.
-
-### Call by Value 
-
-**Definition:** Call by Value means passing a copy of the actual parameters to the function. Changes made to the parameters inside the function do not affect the original variables.
-
-**Working:** The function operates on copies of the values, leaving the original variables unchanged.
-| Features                | Call by Reference                      | Call by Value                        |
-|---------------------------|----------------------------------------|--------------------------------------|
-| **Definition**            | Passes the address (reference) of the actual parameter. | Passes a copy of the actual parameter. |
-| **Function Parameters**   | Function receives pointers or references to the original variables. | Function receives copies of the original values. |
-| **Effect on Original Data**| Modifies the original data.            | Does not modify the original data.  |
-| **Example**        | `void swap(int *x, int *y)`            | `void swap(int x, int y)`            |
-| **Modification of Values**| Changes made in the function affect the original variables. | Changes made in the function do not affect the original variables. |
-| **Memory Usage**          | Uses memory for pointers/references.   | Uses memory for copies of values.    |
-| **Performance**           | More efficient for large data structures due to avoiding copying. | Can be less efficient for large data structures due to copying. |
-| **Use**              | Used when the function needs to modify the input variables. | Used when the function should not alter the input variables. |
-
+A pointer is a variable that stores the memory address of another variable. It does not hold any actual data value like a normal variable, instead holds the location where the data is stored in memory. Pointers allow for efficient array and memory management, and can be used to directly manipulate memory.
+Using pointers significantly improves performance for repetitive operations, like traversing iterable data structures (e.g. strings). In particular, it is often much cheaper in time and space to copy and dereference pointers than it is to copy and access the data to which the pointers point.  
+The basic syntax to define a pointer is:
+```cpp
+int a = 5;
+int *ptr = &a;
+```
 <br>  
 
+*Visual Representation of memory address:*
+<br>
+
+| Address | Contents     |
+|---------|--------------|
+| 0x8130  | 0x00000005   |
+| 0x8134  | 0x00000000   |
+
+<br>
+  
+**Features of Pointers**  
+- An array, of any type, can be accessed with the help of pointers, without considering its subscript range.
+- Pointers are used for file handling.
+- Pointers are used to allocate memory dynamically.
+
+**Advantages of Pointers**
+- Memory efficiency: Pointers allow for memory-efficient data sharing between different parts of a program. 
+- Improved performance: Pointers can help reduce code and improve program performance. 
+- Multiple values: Pointers allow programmers to return multiple values from a function. 
+- Data structure building: Pointers can be used to build complex data structures like linked lists, trees, and graphs
+
+**Drawbacks of Pointers**
+- It requires one additional dereferences step 
+- If we forgot to deallocate a memory then it will lead to a memory leak. 
 
 ## Algorithms
-### Call by reference
+### Address of Data Type after Increment
 
+1.  **Start**
+2. **Initialize Variables**
+   - Define an integer variable `a` with value 10.
+   - Define a pointer variable `ptr` of type `int*` and set it to point to `a`.
+   - Define a float variable `b` with value 9.4.
+   - Define a pointer variable `fptr` of type `float*` and set it to point to `b`.
+   - Define a char variable `c` with value 's'.
+   - Define a pointer variable `cptr` of type `char*` and set it to point to `c`.
+   - Define a bool variable `d` with value `1` (true).
+   - Define a pointer variable `dptr` of type `bool*` and set it to point to `d`.
+
+4. **Integer Pointer Operations**
+   - Print "For integer".
+   - Print "Before increment".
+   - Print the address stored in `ptr` (address of `a`).
+   - Increment `ptr` (move to the next integer address).
+   - Print "After increment".
+   - Print the new address stored in `ptr`.
+
+5. **Float Pointer Operations**
+   - Print"For float".
+   - Print "Before increment".
+   - Print the address stored in `fptr`.
+   - Increment `fptr`.
+   - Print "After increment".
+   - Print the new address stored in `fptr`.
+
+6. **Boolean Pointer Operations**
+   - Print"For boolean".
+   - Print "Before increment".
+   - Print the address stored in `dptr`.
+   - Increment `dptr`.
+   - Print "After increment".
+   - Print the new address stored in `dptr`.
+
+7. **Character Pointer Operations**
+   - Print "For character".
+   - Print "Before increment".
+   - Print the address stored in `cptr`.
+   - Increment `cptr`.
+   - Print "After increment".
+   - Print the new address stored in `cptr`.
+
+8. **End**
+
+### Address of Variables
 1. **Start**
-2. **Define Function `swap(int *x, int *y)`**
-   - **Input:** Pointers to two integers `x` and `y`
-   - **Output:** Swapped values of the integers pointed to by `x` and `y`
-   - **Steps:**
-     1. Make a temporary variable `temp`
-     2. Assign the value pointed to by `x` to `temp` (`temp = *x`)
-     3. Assign the value pointed to by `y` to the location pointed to by `x` (`*x = *y`)
-     4. Assign the value of `temp` to the location pointed to by `y` (`*y = temp`)
-3. **In `main` Function**
-   - Define integers `a` and `b` with 5 and 2.
-   - Call `swap(&a, &b)` function
-   - Print the value of `a`
-   - Print the value of `b`
+
+2. **Initialize Variables**
+   - Declare an integer variable `a` and assign it a value of 10.
+   - Declare a pointer variable `aptr` of type `int*` and assign it the address of variable `a`.
+
+3. **Print Values**
+   - Print the value pointed to by `aptr` using `cout`. This will display the value of `a`.
+   - Print the address stored in `aptr` using `cout`. 
+   - Print the address of `a` directly using `cout`.
+
 4. **End**
-
-
-### Call by value
-
-1. **Start**
-2. **Define Function `swap(int x, int y)`**
-   - **Input:** Two integers `x` and `y`
-   - **Output:** Swapped values of `x` and `y`
-   - **Inside Swap function:**
-     1. Create a temporary variable `temp`
-     2. Assign the value of `x` to `temp`
-     3. Assign the value of `y` to `x`
-     4. Assign the value of `temp` to `y`
-3. **Inside `main` Function**
-   - Define two integers `a` and `b` with 5 and 2
-   - Call `swap(a, b)`
-   - Print the value of `a`
-   - Print the value of `b`
-4. **End**
-
-
 
 
 ## Conclusion
-We learnt about the Operations in Pointers
+We leart the Basics of Pointers.
